@@ -1,585 +1,585 @@
-# Objetos en JavaScript - Guía Completa para Clase
+# JavaScript Objects - Complete Guide for Class
 
-## Tabla de Contenidos
-1. [¿Qué es un objeto?](#qué-es-un-objeto)
-2. [Sintaxis y Creación de Objetos](#sintaxis-y-creación-de-objetos)
-3. [Acceder y Modificar Propiedades](#acceder-y-modificar-propiedades)
-4. [Métodos en Objetos](#métodos-en-objetos)
-5. [Objetos Anidados](#objetos-anidados)
-6. [Arrays de Objetos](#arrays-de-objetos)
-7. [Métodos Importantes de Object](#métodos-importantes-de-object)
-8. [Desestructuración](#desestructuración)
+## Table of Contents
+1. [What is an object?](#what-is-an-object)
+2. [Syntax and Creating Objects](#syntax-and-creating-objects)
+3. [Accessing and Modifying Properties](#accessing-and-modifying-properties)
+4. [Methods in Objects](#methods-in-objects)
+5. [Nested Objects](#nested-objects)
+6. [Arrays of Objects](#arrays-of-objects)
+7. [Important Object Methods](#important-object-methods)
+8. [Destructuring](#destructuring)
 9. [Spread Operator](#spread-operator)
-10. [Conceptos Avanzados](#conceptos-avanzados)
+10. [Advanced Concepts](#advanced-concepts)
 
 ---
 
-## ¿Qué es un objeto?
+## What is an object?
 
-Un **objeto** en JavaScript es una colección de propiedades relacionadas que representan una entidad. Es como un contenedor que agrupa información y funcionalidad.
+An **object** in JavaScript is a collection of related properties that represent an entity. It's like a container that groups information and functionality together.
 
-### Sin objetos (problemático):
+### Without objects (problematic):
 ```javascript
-let nombrePersona = "Carlos";
-let edadPersona = 28;
-let profesionPersona = "Desarrollador";
+let personName = "Carlos";
+let personAge = 28;
+let personProfession = "Developer";
 ```
 
-### Con objetos (organizado):
+### With objects (organized):
 ```javascript
-let persona = {
-  nombre: "Carlos",
-  edad: 28,
-  profesion: "Desarrollador"
+let person = {
+  name: "Carlos",
+  age: 28,
+  profession: "Developer"
 };
 ```
 
-**Concepto clave**: Un objeto es una colección de pares clave-valor donde cada propiedad tiene un nombre (clave) y un valor asociado.
+**Key concept**: An object is a collection of key-value pairs where each property has a name (key) and an associated value.
 
 ---
 
-## Sintaxis y Creación de Objetos
+## Syntax and Creating Objects
 
-### 1. Notación Literal (más común)
+### 1. Literal Notation (most common)
 ```javascript
-let producto = {
-  nombre: "Laptop",
-  precio: 1500,
-  disponible: true
+let product = {
+  name: "Laptop",
+  price: 1500,
+  available: true
 };
 ```
 
-### 2. Constructor Object
+### 2. Object Constructor
 ```javascript
-let producto = new Object();
-producto.nombre = "Laptop";
-producto.precio = 1500;
-producto.disponible = true;
+let product = new Object();
+product.name = "Laptop";
+product.price = 1500;
+product.available = true;
 ```
 
 ### 3. Object.create()
 ```javascript
-let producto = Object.create(null);
-producto.nombre = "Laptop";
-producto.precio = 1500;
+let product = Object.create(null);
+product.name = "Laptop";
+product.price = 1500;
 ```
 
 ---
 
-## Acceder y Modificar Propiedades
+## Accessing and Modifying Properties
 
-### Notación de Punto
+### Dot Notation
 ```javascript
-// Acceder
-console.log(persona.nombre); // "Carlos"
+// Access
+console.log(person.name); // "Carlos"
 
-// Modificar
-persona.edad = 29;
+// Modify
+person.age = 29;
 
-// Agregar nueva propiedad
-persona.ciudad = "Bogotá";
+// Add new property
+person.city = "New York";
 ```
 
-### Notación de Corchetes
+### Bracket Notation
 ```javascript
-// Acceder con variable
-let propiedad = "nombre";
-console.log(persona[propiedad]); // "Carlos"
+// Access with variable
+let property = "name";
+console.log(person[property]); // "Carlos"
 
-// Agregar propiedad
-persona["apellido"] = "González";
+// Add property
+person["lastName"] = "Gonzalez";
 
-// Propiedad con espacios
+// Property with spaces
 let obj = {
-  "nombre completo": "Carlos González"
+  "full name": "Carlos Gonzalez"
 };
-console.log(obj["nombre completo"]);
+console.log(obj["full name"]);
 ```
 
-### ¿Cuándo usar corchetes?
-- Cuando el nombre de la propiedad está en una variable
-- Cuando el nombre tiene espacios o caracteres especiales
-- Para construir propiedades dinámicamente en bucles
+### When to use brackets?
+- When the property name is in a variable
+- When the name has spaces or special characters
+- To build properties dynamically in loops
 
 ---
 
-## Métodos en Objetos
+## Methods in Objects
 
-Los objetos pueden tener funciones como propiedades, llamadas **métodos**.
+Objects can have functions as properties, called **methods**.
 
-### Sintaxis Tradicional
+### Traditional Syntax
 ```javascript
-let calculadora = {
-  numero1: 10,
-  numero2: 5,
+let calculator = {
+  number1: 10,
+  number2: 5,
   
-  sumar: function() {
-    return this.numero1 + this.numero2;
+  add: function() {
+    return this.number1 + this.number2;
   },
   
-  restar: function() {
-    return this.numero1 - this.numero2;
+  subtract: function() {
+    return this.number1 - this.number2;
   }
 };
 
-console.log(calculadora.sumar()); // 15
+console.log(calculator.add()); // 15
 ```
 
-### Sintaxis Moderna (ES6)
+### Modern Syntax (ES6)
 ```javascript
-let calculadora = {
-  numero1: 10,
-  numero2: 5,
+let calculator = {
+  number1: 10,
+  number2: 5,
   
-  sumar() {
-    return this.numero1 + this.numero2;
+  add() {
+    return this.number1 + this.number2;
   },
   
-  restar() {
-    return this.numero1 - this.numero2;
+  subtract() {
+    return this.number1 - this.number2;
   }
 };
 ```
 
-### La palabra clave `this`
-`this` se refiere al objeto actual. Es como decir "este objeto en el que estoy".
+### The `this` keyword
+`this` refers to the current object. It's like saying "this object I'm in".
 ```javascript
-let persona = {
-  nombre: "Ana",
-  edad: 25,
+let person = {
+  name: "Ana",
+  age: 25,
   
-  saludar() {
-    return `Hola, soy ${this.nombre} y tengo ${this.edad} años`;
+  greet() {
+    return `Hello, I'm ${this.name} and I'm ${this.age} years old`;
   }
 };
 
-console.log(persona.saludar());
-// "Hola, soy Ana y tengo 25 años"
-```
-
----
-
-## Objetos Anidados
-
-Los objetos pueden contener otros objetos como propiedades.
-```javascript
-let estudiante = {
-  nombre: "Ana",
-  edad: 20,
-  direccion: {
-    calle: "Cra 7",
-    numero: 123,
-    ciudad: "Bogotá",
-    pais: "Colombia"
-  },
-  calificaciones: {
-    matematicas: 4.5,
-    programacion: 5.0,
-    ingles: 4.2
-  }
-};
-
-// Acceder a propiedades anidadas
-console.log(estudiante.direccion.ciudad); // "Bogotá"
-console.log(estudiante.calificaciones.programacion); // 5.0
-
-// Modificar propiedades anidadas
-estudiante.direccion.ciudad = "Medellín";
+console.log(person.greet());
+// "Hello, I'm Ana and I'm 25 years old"
 ```
 
 ---
 
-## Arrays de Objetos
+## Nested Objects
 
-Una estructura muy común en aplicaciones reales.
+Objects can contain other objects as properties.
 ```javascript
-let estudiantes = [
-  { nombre: "Ana", edad: 20, promedio: 4.2 },
-  { nombre: "Luis", edad: 22, promedio: 3.8 },
-  { nombre: "María", edad: 21, promedio: 4.7 },
-  { nombre: "Pedro", edad: 19, promedio: 4.0 }
+let student = {
+  name: "Ana",
+  age: 20,
+  address: {
+    street: "7th Ave",
+    number: 123,
+    city: "New York",
+    country: "USA"
+  },
+  grades: {
+    math: 4.5,
+    programming: 5.0,
+    english: 4.2
+  }
+};
+
+// Access nested properties
+console.log(student.address.city); // "New York"
+console.log(student.grades.programming); // 5.0
+
+// Modify nested properties
+student.address.city = "Boston";
+```
+
+---
+
+## Arrays of Objects
+
+A very common structure in real applications.
+```javascript
+let students = [
+  { name: "Ana", age: 20, average: 4.2 },
+  { name: "Luis", age: 22, average: 3.8 },
+  { name: "Maria", age: 21, average: 4.7 },
+  { name: "Peter", age: 19, average: 4.0 }
 ];
 
-// Acceder a un estudiante específico
-console.log(estudiantes[0].nombre); // "Ana"
+// Access a specific student
+console.log(students[0].name); // "Ana"
 
-// Recorrer con forEach
-estudiantes.forEach(estudiante => {
-  console.log(`${estudiante.nombre}: ${estudiante.promedio}`);
+// Iterate with forEach
+students.forEach(student => {
+  console.log(`${student.name}: ${student.average}`);
 });
 
-// Filtrar estudiantes
-let destacados = estudiantes.filter(est => est.promedio > 4.0);
+// Filter students
+let outstanding = students.filter(std => std.average > 4.0);
 
-// Mapear para obtener solo nombres
-let nombres = estudiantes.map(est => est.nombre);
+// Map to get only names
+let names = students.map(std => std.name);
 
-// Encontrar un estudiante
-let ana = estudiantes.find(est => est.nombre === "Ana");
+// Find a student
+let ana = students.find(std => std.name === "Ana");
 ```
 
 ---
 
-## Métodos Importantes de Object
+## Important Object Methods
 
 ### Object.keys()
-Retorna un array con las claves (nombres de propiedades).
+Returns an array with the keys (property names).
 ```javascript
-let persona = { nombre: "Carlos", edad: 28, ciudad: "Bogotá" };
-let claves = Object.keys(persona);
-console.log(claves); // ["nombre", "edad", "ciudad"]
+let person = { name: "Carlos", age: 28, city: "New York" };
+let keys = Object.keys(person);
+console.log(keys); // ["name", "age", "city"]
 ```
 
 ### Object.values()
-Retorna un array con los valores.
+Returns an array with the values.
 ```javascript
-let valores = Object.values(persona);
-console.log(valores); // ["Carlos", 28, "Bogotá"]
+let values = Object.values(person);
+console.log(values); // ["Carlos", 28, "New York"]
 ```
 
 ### Object.entries()
-Retorna un array de arrays con pares [clave, valor].
+Returns an array of arrays with [key, value] pairs.
 ```javascript
-let entradas = Object.entries(persona);
-console.log(entradas);
-// [["nombre", "Carlos"], ["edad", 28], ["ciudad", "Bogotá"]]
+let entries = Object.entries(person);
+console.log(entries);
+// [["name", "Carlos"], ["age", 28], ["city", "New York"]]
 
-// Útil para iterar
-Object.entries(persona).forEach(([clave, valor]) => {
-  console.log(`${clave}: ${valor}`);
+// Useful for iteration
+Object.entries(person).forEach(([key, value]) => {
+  console.log(`${key}: ${value}`);
 });
 ```
 
 ### Object.assign()
-Copia propiedades de uno o más objetos a un objeto destino.
+Copies properties from one or more objects to a target object.
 ```javascript
 let obj1 = { a: 1, b: 2 };
 let obj2 = { c: 3, d: 4 };
 let obj3 = { e: 5 };
 
-let combinado = Object.assign({}, obj1, obj2, obj3);
-console.log(combinado); // { a: 1, b: 2, c: 3, d: 4, e: 5 }
+let combined = Object.assign({}, obj1, obj2, obj3);
+console.log(combined); // { a: 1, b: 2, c: 3, d: 4, e: 5 }
 ```
 
 ### Object.freeze()
-Congela un objeto, impidiendo modificaciones.
+Freezes an object, preventing modifications.
 ```javascript
 let config = { apiUrl: "https://api.example.com" };
 Object.freeze(config);
 
-config.apiUrl = "otra-url"; // No tiene efecto
+config.apiUrl = "another-url"; // No effect
 console.log(config.apiUrl); // "https://api.example.com"
 ```
 
 ### Object.seal()
-Sella un objeto: puedes modificar propiedades existentes pero no agregar/eliminar.
+Seals an object: you can modify existing properties but not add/delete.
 ```javascript
-let persona = { nombre: "Carlos", edad: 28 };
-Object.seal(persona);
+let person = { name: "Carlos", age: 28 };
+Object.seal(person);
 
-persona.edad = 29; // Funciona
-persona.ciudad = "Bogotá"; // No tiene efecto
-delete persona.nombre; // No tiene efecto
+person.age = 29; // Works
+person.city = "New York"; // No effect
+delete person.name; // No effect
 ```
 
 ---
 
-## Desestructuración
+## Destructuring
 
-Extraer propiedades de objetos de manera elegante.
+Extract properties from objects in an elegant way.
 
-### Desestructuración Básica
+### Basic Destructuring
 ```javascript
-let persona = { nombre: "Carlos", edad: 28, ciudad: "Bogotá" };
+let person = { name: "Carlos", age: 28, city: "New York" };
 
-// Forma tradicional
-let nombre = persona.nombre;
-let edad = persona.edad;
+// Traditional way
+let name = person.name;
+let age = person.age;
 
-// Con desestructuración
-let { nombre, edad } = persona;
-console.log(nombre); // "Carlos"
-console.log(edad); // 28
+// With destructuring
+let { name, age } = person;
+console.log(name); // "Carlos"
+console.log(age); // 28
 ```
 
-### Renombrar Variables
+### Renaming Variables
 ```javascript
-let { nombre: nombrePersona, edad: edadPersona } = persona;
-console.log(nombrePersona); // "Carlos"
+let { name: personName, age: personAge } = person;
+console.log(personName); // "Carlos"
 ```
 
-### Valores por Defecto
+### Default Values
 ```javascript
-let { nombre, edad, pais = "Colombia" } = persona;
-console.log(pais); // "Colombia" (si no existe en el objeto)
+let { name, age, country = "USA" } = person;
+console.log(country); // "USA" (if it doesn't exist in the object)
 ```
 
-### Desestructuración Anidada
+### Nested Destructuring
 ```javascript
-let estudiante = {
-  nombre: "Ana",
-  direccion: {
-    ciudad: "Bogotá",
-    pais: "Colombia"
+let student = {
+  name: "Ana",
+  address: {
+    city: "New York",
+    country: "USA"
   }
 };
 
-let { nombre, direccion: { ciudad } } = estudiante;
-console.log(ciudad); // "Bogotá"
+let { name, address: { city } } = student;
+console.log(city); // "New York"
 ```
 
-### En Parámetros de Función
+### In Function Parameters
 ```javascript
-function mostrarPersona({ nombre, edad }) {
-  console.log(`${nombre} tiene ${edad} años`);
+function showPerson({ name, age }) {
+  console.log(`${name} is ${age} years old`);
 }
 
-mostrarPersona(persona); // "Carlos tiene 28 años"
+showPerson(person); // "Carlos is 28 years old"
 ```
 
 ---
 
 ## Spread Operator
 
-El operador spread (...) permite expandir objetos.
+The spread operator (...) allows you to expand objects.
 
-### Copiar Objetos
+### Copy Objects
 ```javascript
-let persona = { nombre: "Carlos", edad: 28 };
-let copia = { ...persona };
+let person = { name: "Carlos", age: 28 };
+let copy = { ...person };
 
-// Modificar la copia no afecta el original
-copia.edad = 30;
-console.log(persona.edad); // 28
+// Modifying the copy doesn't affect the original
+copy.age = 30;
+console.log(person.age); // 28
 ```
 
-### Combinar Objetos
+### Combine Objects
 ```javascript
-let info1 = { nombre: "Carlos", edad: 28 };
-let info2 = { ciudad: "Bogotá", profesion: "Developer" };
+let info1 = { name: "Carlos", age: 28 };
+let info2 = { city: "New York", profession: "Developer" };
 
-let completo = { ...info1, ...info2 };
-// { nombre: "Carlos", edad: 28, ciudad: "Bogotá", profesion: "Developer" }
+let complete = { ...info1, ...info2 };
+// { name: "Carlos", age: 28, city: "New York", profession: "Developer" }
 ```
 
-### Agregar/Sobrescribir Propiedades
+### Add/Overwrite Properties
 ```javascript
-let persona = { nombre: "Carlos", edad: 28 };
-let empleado = { ...persona, puesto: "Developer", edad: 29 };
-// { nombre: "Carlos", edad: 29, puesto: "Developer" }
-// La edad se sobrescribe
+let person = { name: "Carlos", age: 28 };
+let employee = { ...person, position: "Developer", age: 29 };
+// { name: "Carlos", age: 29, position: "Developer" }
+// The age is overwritten
 ```
 
 ---
 
-## Conceptos Avanzados
+## Advanced Concepts
 
-### Comparación de Objetos
-Los objetos se comparan por referencia, no por contenido.
+### Comparing Objects
+Objects are compared by reference, not by content.
 ```javascript
 let obj1 = { a: 1 };
 let obj2 = { a: 1 };
 let obj3 = obj1;
 
-console.log(obj1 === obj2); // false (diferentes referencias)
-console.log(obj1 === obj3); // true (misma referencia)
+console.log(obj1 === obj2); // false (different references)
+console.log(obj1 === obj3); // true (same reference)
 
-// Para comparar contenido, usa JSON.stringify
+// To compare content, use JSON.stringify
 console.log(JSON.stringify(obj1) === JSON.stringify(obj2)); // true
 ```
 
-### Eliminar Propiedades
+### Deleting Properties
 ```javascript
-let persona = { nombre: "Carlos", edad: 28, ciudad: "Bogotá" };
-delete persona.edad;
-console.log(persona); // { nombre: "Carlos", ciudad: "Bogotá" }
+let person = { name: "Carlos", age: 28, city: "New York" };
+delete person.age;
+console.log(person); // { name: "Carlos", city: "New York" }
 ```
 
-### Verificar si Existe una Propiedad
+### Check if a Property Exists
 ```javascript
-let persona = { nombre: "Carlos", edad: 28 };
+let person = { name: "Carlos", age: 28 };
 
-// Operador in
-console.log("nombre" in persona); // true
-console.log("apellido" in persona); // false
+// in operator
+console.log("name" in person); // true
+console.log("lastName" in person); // false
 
 // hasOwnProperty
-console.log(persona.hasOwnProperty("nombre")); // true
+console.log(person.hasOwnProperty("name")); // true
 ```
 
 ### Optional Chaining (?.)
-Evita errores al acceder a propiedades que podrían no existir.
+Avoid errors when accessing properties that might not exist.
 ```javascript
-let persona = {
-  nombre: "Carlos",
-  direccion: {
-    ciudad: "Bogotá"
+let person = {
+  name: "Carlos",
+  address: {
+    city: "New York"
   }
 };
 
-// Sin optional chaining (puede dar error)
-// console.log(persona.trabajo.empresa); // Error!
+// Without optional chaining (might throw error)
+// console.log(person.job.company); // Error!
 
-// Con optional chaining
-console.log(persona.trabajo?.empresa); // undefined (sin error)
-console.log(persona.direccion?.ciudad); // "Bogotá"
+// With optional chaining
+console.log(person.job?.company); // undefined (no error)
+console.log(person.address?.city); // "New York"
 ```
 
-### Getters y Setters
+### Getters and Setters
 ```javascript
-let persona = {
-  nombre: "Carlos",
-  apellido: "González",
+let person = {
+  name: "Carlos",
+  lastName: "Gonzalez",
   
-  get nombreCompleto() {
-    return `${this.nombre} ${this.apellido}`;
+  get fullName() {
+    return `${this.name} ${this.lastName}`;
   },
   
-  set nombreCompleto(valor) {
-    [this.nombre, this.apellido] = valor.split(" ");
+  set fullName(value) {
+    [this.name, this.lastName] = value.split(" ");
   }
 };
 
-console.log(persona.nombreCompleto); // "Carlos González"
-persona.nombreCompleto = "Ana Martínez";
-console.log(persona.nombre); // "Ana"
+console.log(person.fullName); // "Carlos Gonzalez"
+person.fullName = "Ana Martinez";
+console.log(person.name); // "Ana"
 ```
 
 ---
 
-## Estructura de Clase (1 hora)
+## Class Structure (1 hour)
 
-### Fase 1: Introducción (10 min)
-- ¿Qué son los objetos y por qué son importantes?
-- Ejemplos del mundo real
-- Sintaxis básica
+### Phase 1: Introduction (10 min)
+- What are objects and why are they important?
+- Real-world examples
+- Basic syntax
 
-### Fase 2: Fundamentos (15 min)
-- Crear objetos
-- Acceder y modificar propiedades
-- Notación de punto vs corchetes
+### Phase 2: Fundamentals (15 min)
+- Creating objects
+- Accessing and modifying properties
+- Dot notation vs brackets
 
-### Fase 3: Características Avanzadas (15 min)
-- Métodos y `this`
-- Objetos anidados
-- Arrays de objetos
+### Phase 3: Advanced Features (15 min)
+- Methods and `this`
+- Nested objects
+- Arrays of objects
 
-### Fase 4: Herramientas Modernas (10 min)
-- Métodos de Object
-- Desestructuración
+### Phase 4: Modern Tools (10 min)
+- Object methods
+- Destructuring
 - Spread operator
 
-### Fase 5: Ejercicios Prácticos (10 min)
-- Presentar los 3 ejercicios
-- Aclarar dudas
+### Phase 5: Practical Exercises (10 min)
+- Present the 3 exercises
+- Answer questions
 
 ---
 
-## Ejercicios Prácticos
+## Practical Exercises
 
-### Ejercicio 1: Sistema de Biblioteca (Básico)
+### Exercise 1: Library System (Basic)
 
-Crea un objeto `libro` con las siguientes propiedades:
-- título
-- autor
-- año de publicación
-- número de páginas
-- disponible (boolean)
+Create a `book` object with the following properties:
+- title
+- author
+- year of publication
+- number of pages
+- available (boolean)
 
-Luego agrega un método `descripcion()` que retorne un string con toda la información del libro en formato legible.
+Then add a `description()` method that returns a string with all the book information in a readable format.
 
-**Ejemplo de salida:**
+**Example output:**
 ```
-"El libro 'Cien años de soledad' de Gabriel García Márquez, publicado en 1967, 
-tiene 417 páginas y está disponible."
+"The book 'One Hundred Years of Solitude' by Gabriel Garcia Marquez, published in 1967, 
+has 417 pages and is available."
 ```
 
 ---
 
-### Ejercicio 2: Carrito de Compras (Intermedio)
+### Exercise 2: Shopping Cart (Intermediate)
 
-Crea un objeto `carritoCompras` que contenga:
+Create a `shoppingCart` object that contains:
 
-**Propiedades:**
-- `productos`: array de objetos, donde cada producto tiene nombre, precio y cantidad
+**Properties:**
+- `products`: array of objects, where each product has name, price, and quantity
 
-**Métodos:**
-- `agregarProducto(nombre, precio, cantidad)`: agrega un producto al carrito
-- `calcularTotal()`: retorna el precio total (precio × cantidad de todos los productos)
-- `aplicarDescuento(porcentaje)`: aplica un descuento al total y retorna el nuevo total
-- `mostrarProductos()`: muestra en consola todos los productos del carrito
+**Methods:**
+- `addProduct(name, price, quantity)`: adds a product to the cart
+- `calculateTotal()`: returns the total price (price × quantity of all products)
+- `applyDiscount(percentage)`: applies a discount to the total and returns the new total
+- `showProducts()`: displays all cart products in the console
 
-**Ejemplo de uso:**
+**Usage example:**
 ```javascript
-carritoCompras.agregarProducto("Laptop", 1500, 1);
-carritoCompras.agregarProducto("Mouse", 25, 2);
-console.log(carritoCompras.calcularTotal()); // 1550
-console.log(carritoCompras.aplicarDescuento(10)); // 1395 (10% de descuento)
+shoppingCart.addProduct("Laptop", 1500, 1);
+shoppingCart.addProduct("Mouse", 25, 2);
+console.log(shoppingCart.calculateTotal()); // 1550
+console.log(shoppingCart.applyDiscount(10)); // 1395 (10% discount)
 ```
 
 ---
 
-### Ejercicio 3: Sistema de Estudiantes (Avanzado)
+### Exercise 3: Student System (Advanced)
 
-Crea un array llamado `estudiantes` donde cada estudiante es un objeto con:
-- nombre
-- edad
-- calificaciones (objeto con materias y notas)
+Create an array called `students` where each student is an object with:
+- name
+- age
+- grades (object with subjects and scores)
 
-**Implementa las siguientes funciones:**
+**Implement the following functions:**
 
-1. `calcularPromedio(estudiante)`: retorna el promedio de calificaciones de un estudiante
+1. `calculateAverage(student)`: returns the average of a student's grades
 
-2. `obtenerMejorEstudiante(estudiantes)`: retorna el estudiante con el mejor promedio
+2. `getBestStudent(students)`: returns the student with the best average
 
-3. `estudiantesDestacados(estudiantes)`: retorna un array con los estudiantes mayores de edad (≥18) que tengan promedio superior a 4.0
+3. `outstandingStudents(students)`: returns an array with students of legal age (≥18) who have an average above 4.0
 
-4. `agregarCalificacion(estudiante, materia, nota)`: agrega una nueva calificación al estudiante
+4. `addGrade(student, subject, grade)`: adds a new grade to the student
 
-**Ejemplo de estructura:**
+**Structure example:**
 ```javascript
-let estudiantes = [
+let students = [
   {
-    nombre: "Ana",
-    edad: 20,
-    calificaciones: {
-      matematicas: 4.5,
-      programacion: 5.0,
-      ingles: 4.2
+    name: "Ana",
+    age: 20,
+    grades: {
+      math: 4.5,
+      programming: 5.0,
+      english: 4.2
     }
   },
-  // ... más estudiantes
+  // ... more students
 ];
 ```
 
 ---
 
-## Preguntas Frecuentes
+## Frequently Asked Questions
 
-### ¿Cuál es la diferencia entre objetos y arrays?
-- **Arrays**: colecciones ordenadas, se accede por índice numérico
-- **Objetos**: colecciones de pares clave-valor, se accede por nombre de propiedad
+### What's the difference between objects and arrays?
+- **Arrays**: ordered collections, accessed by numeric index
+- **Objects**: collections of key-value pairs, accessed by property name
 
-### ¿Qué pasa si intento acceder a una propiedad que no existe?
-Retorna `undefined`, no genera un error.
+### What happens if I try to access a property that doesn't exist?
+Returns `undefined`, doesn't generate an error.
 
-### ¿Puedo tener funciones dentro de objetos?
-Sí, se llaman métodos y son muy comunes.
+### Can I have functions inside objects?
+Yes, they're called methods and are very common.
 
-### ¿Los objetos son mutables?
-Sí, puedes modificar sus propiedades incluso si están declarados con `const`. El `const` solo impide reasignar la variable, no modificar el contenido del objeto.
+### Are objects mutable?
+Yes, you can modify their properties even if they're declared with `const`. The `const` only prevents reassigning the variable, not modifying the object's content.
 
-### ¿Cómo copio un objeto sin que se modifique el original?
-Usa spread operator o `Object.assign()` para copias superficiales. Para copias profundas, usa `structuredClone()` o JSON parse/stringify.
-
----
-
-## Recursos Adicionales
-
-- [MDN Web Docs - Objetos](https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Working_with_Objects)
-- [JavaScript.info - Objetos](https://javascript.info/object)
-- Practica en: [Exercism](https://exercism.org/tracks/javascript), [Codewars](https://www.codewars.com/)
+### How do I copy an object without modifying the original?
+Use spread operator or `Object.assign()` for shallow copies. For deep copies, use `structuredClone()` or JSON parse/stringify.
 
 ---
 
-**¡Éxito en tu clase! 🚀**
+## Additional Resources
+
+- [MDN Web Docs - Objects](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Working_with_Objects)
+- [JavaScript.info - Objects](https://javascript.info/object)
+- Practice at: [Exercism](https://exercism.org/tracks/javascript), [Codewars](https://www.codewars.com/)
+
+---
+
+**Good luck with your class! 🚀**
