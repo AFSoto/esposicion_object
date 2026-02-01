@@ -80,28 +80,6 @@ persona.edad = 29;
 persona.ciudad = "Bogotá";
 ```
 
-### Notación de Corchetes
-```javascript
-// Acceder con variable
-let propiedad = "nombre";
-console.log(persona[propiedad]); // "Carlos"
-
-// Agregar propiedad
-persona["apellido"] = "González";
-
-// Propiedad con espacios
-let obj = {
-  "nombre completo": "Carlos González"
-};
-console.log(obj["nombre completo"]);
-```
-
-### ¿Cuándo usar corchetes?
-- Cuando el nombre de la propiedad está en una variable
-- Cuando el nombre tiene espacios o caracteres especiales
-- Para construir propiedades dinámicamente en bucles
-
----
 
 ## Métodos en Objetos
 
@@ -207,14 +185,16 @@ console.log(estudiantes[0].nombre); // "Ana"
 estudiantes.forEach(estudiante => {
   console.log(`${estudiante.nombre}: ${estudiante.promedio}`);
 });
-
-// Filtrar estudiantes
+// Filtrar estudiantes,Selecciona varios elementos que cumplen una condición,
+// devuelve un nuevo array,No modifica el original
 let destacados = estudiantes.filter(est => est.promedio > 4.0);
 
-// Mapear para obtener solo nombres
+// Mapear para obtener solo nombres,Transforma cada elemento del array en otra cosa.
+//Devuelve: un NUEVO array Siempre devuelve el mismo tamaño No modifica el original
 let nombres = estudiantes.map(est => est.nombre);
 
-// Encontrar un estudiante
+// Encontrar un estudiante,Busca el PRIMER elemento que cumple la condición.
+//Devuelve:Un objeto (si lo encuentra),undefined (si no existe)
 let ana = estudiantes.find(est => est.nombre === "Ana");
 ```
 
@@ -250,39 +230,6 @@ Object.entries(persona).forEach(([clave, valor]) => {
 });
 ```
 
-### Object.assign()
-Copia propiedades de uno o más objetos a un objeto destino.
-```javascript
-let obj1 = { a: 1, b: 2 };
-let obj2 = { c: 3, d: 4 };
-let obj3 = { e: 5 };
-
-let combinado = Object.assign({}, obj1, obj2, obj3);
-console.log(combinado); // { a: 1, b: 2, c: 3, d: 4, e: 5 }
-```
-
-### Object.freeze()
-Congela un objeto, impidiendo modificaciones.
-```javascript
-let config = { apiUrl: "https://api.example.com" };
-Object.freeze(config);
-
-config.apiUrl = "otra-url"; // No tiene efecto
-console.log(config.apiUrl); // "https://api.example.com"
-```
-
-### Object.seal()
-Sella un objeto: puedes modificar propiedades existentes pero no agregar/eliminar.
-```javascript
-let persona = { nombre: "Carlos", edad: 28 };
-Object.seal(persona);
-
-persona.edad = 29; // Funciona
-persona.ciudad = "Bogotá"; // No tiene efecto
-delete persona.nombre; // No tiene efecto
-```
-
----
 
 ## Desestructuración
 
@@ -328,16 +275,7 @@ let { nombre, direccion: { ciudad } } = estudiante;
 console.log(ciudad); // "Bogotá"
 ```
 
-### En Parámetros de Función
-```javascript
-function mostrarPersona({ nombre, edad }) {
-  console.log(`${nombre} tiene ${edad} años`);
-}
 
-mostrarPersona(persona); // "Carlos tiene 28 años"
-```
-
----
 
 ## Spread Operator
 
@@ -407,23 +345,7 @@ console.log("apellido" in persona); // false
 console.log(persona.hasOwnProperty("nombre")); // true
 ```
 
-### Optional Chaining (?.)
-Evita errores al acceder a propiedades que podrían no existir.
-```javascript
-let persona = {
-  nombre: "Carlos",
-  direccion: {
-    ciudad: "Bogotá"
-  }
-};
 
-// Sin optional chaining (puede dar error)
-// console.log(persona.trabajo.empresa); // Error!
-
-// Con optional chaining
-console.log(persona.trabajo?.empresa); // undefined (sin error)
-console.log(persona.direccion?.ciudad); // "Bogotá"
-```
 
 ### Getters y Setters
 ```javascript
@@ -444,36 +366,6 @@ console.log(persona.nombreCompleto); // "Carlos González"
 persona.nombreCompleto = "Ana Martínez";
 console.log(persona.nombre); // "Ana"
 ```
-
----
-
-## Estructura de Clase (1 hora)
-
-### Fase 1: Introducción (10 min)
-- ¿Qué son los objetos y por qué son importantes?
-- Ejemplos del mundo real
-- Sintaxis básica
-
-### Fase 2: Fundamentos (15 min)
-- Crear objetos
-- Acceder y modificar propiedades
-- Notación de punto vs corchetes
-
-### Fase 3: Características Avanzadas (15 min)
-- Métodos y `this`
-- Objetos anidados
-- Arrays de objetos
-
-### Fase 4: Herramientas Modernas (10 min)
-- Métodos de Object
-- Desestructuración
-- Spread operator
-
-### Fase 5: Ejercicios Prácticos (10 min)
-- Presentar los 3 ejercicios
-- Aclarar dudas
-
----
 
 ## Ejercicios Prácticos
 
