@@ -18,7 +18,7 @@
 
 Un **objeto** en JavaScript es una colección de propiedades relacionadas que representan una entidad. Es como un contenedor que agrupa información y funcionalidad.
 
-### Sin objetos (problemático):
+### Sin objetos (problemático):mucha informacion regada
 ```javascript
 let nombrePersona = "Carlos";
 let edadPersona = 28;
