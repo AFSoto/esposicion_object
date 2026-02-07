@@ -57,13 +57,6 @@ producto.precio = 1500;
 producto.disponible = true;
 ```
 
-### 3. Object.create()
-```javascript
-let producto = Object.create(null);
-producto.nombre = "Laptop";
-producto.precio = 1500;
-```
-
 ---
 
 ## Acceder y Modificar Propiedades
